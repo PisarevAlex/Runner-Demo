@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 554518991}
   - component: {fileID: 554518992}
   - component: {fileID: 554518997}
+  - component: {fileID: 554518994}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -48,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db8c80a658d5419c8b8498826059be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  param: {fileID: 11400000, guid: 81812bacdfa504fac98f87940bfeebab, type: 2}
+  parameters: {fileID: 11400000, guid: 744fe7ff803f34f2ea0dcc5afc0d6dd0, type: 2}
   animator: {fileID: 31641106}
   model: {fileID: 4177737848083411057}
   rb: {fileID: 554518991}
@@ -98,6 +99,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   counterUI: {fileID: 0}
   <Points>k__BackingField: 0
+--- !u!114 &554518994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4499367663052211475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f191e191c544bc8add162107368200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4499367664309376922
 PrefabInstance:
   m_ObjectHideFlags: 0

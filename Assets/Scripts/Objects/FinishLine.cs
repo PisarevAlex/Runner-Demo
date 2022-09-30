@@ -4,13 +4,16 @@ public class FinishLine : MonoBehaviour
 {
     public GameObject finishFXPrefab;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (other.TryGetComponent<IControllable>(out IControllable controllable))
+        if (collider.TryGetComponent(out CloneController clone))
         {
-            GameObject fx = GameObject.Instantiate(finishFXPrefab);
-            fx.transform.position = other.transform.position;
+            if (!clone.IsInCrowd) return;
 
+            FindObjectOfType<CrowdController>().Finish();
+
+            GameObject fx = GameObject.Instantiate(finishFXPrefab);
+            fx.transform.position = collider.transform.position;
             FindObjectOfType<LevelManager>().Finish();
         }
     }

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be89ace9b11534a70a7893c13f29bfc6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a701ccf5f86f4aec87ab5917a487786, type: 3}
   m_Name: Hero Parameters
   m_EditorClassIdentifier: 
   acceleration: 9
   turnForce: 4
   deceleration: 0.2
-  maxRunSpeed: 6
+  maxRunSpeed: 2
   maxTurnSpeed: 3
   maxTiltAngle: 0
   maxRotation: 40

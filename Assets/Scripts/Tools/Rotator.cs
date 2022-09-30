@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Rotator : MonoBehaviour
 {
+    [SerializeField] private Vector3 rotationVector = Vector3.up;
     public float rotationSpeed;
     [SerializeField] private float bounceSpeed;
     [SerializeField] private float bounceAmplitude;
@@ -9,7 +10,7 @@ public class Rotator : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        transform.localEulerAngles= new Vector3(0, Random.Range(0, 180), 0);
+        transform.Rotate(rotationVector, Random.Range(0,360), Space.Self);
     }
 
     private void Update()
@@ -29,6 +30,6 @@ public class Rotator : MonoBehaviour
 
     private void RotateObj(float speed)
     {
-        transform.Rotate(Vector3.up, Time.deltaTime * speed);
+        transform.Rotate(rotationVector, Time.deltaTime * speed, Space.Self);
     }
 }

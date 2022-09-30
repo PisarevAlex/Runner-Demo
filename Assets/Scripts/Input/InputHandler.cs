@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class InputHandler : MonoBehaviour
@@ -7,34 +8,57 @@ public class InputHandler : MonoBehaviour
     private IControllable controllable;
     private InputActions inputActions;
 
+    public Vector2 pointerPosition;
+
+    public Action onTouchPerformed;
+    public Action onTouchCanceled;
+
     private void OnEnable()
     {
         controllable = controllableObj.GetComponent<IControllable>();
         if (controllable == null) Debug.LogError("Controllable Object Not Found");
 
         inputActions = new InputActions();
-        inputActions.Player.Turn.performed += ctx => controllable.Turn(ctx.ReadValue<Vector2>());
-        inputActions.Player.Run.performed += ctx => controllable.Run();
-        inputActions.Player.Run.canceled += ctx => controllable.Stop();
-        inputActions.Player.Enable();
+
+        inputActions.Player.Turn.performed += ctx => controllable?.Turn(ctx.ReadValue<Vector2>());
+        inputActions.Player.Touch.performed += ctx => TouchPerformed();
+        inputActions.Player.Touch.canceled += ctx => TouchCanceled();
+        inputActions.Enable();
     }
 
     private void OnDisable()
     {
-        inputActions.Player.Turn.performed -= ctx => controllable.Turn(ctx.ReadValue<Vector2>());
-        inputActions.Player.Run.performed -= ctx => controllable.Run();
-        inputActions.Player.Run.canceled -= ctx => controllable.Stop();
-        inputActions.Player.Disable();
+        inputActions.Player.Turn.performed -= ctx => controllable?.Turn(ctx.ReadValue<Vector2>());
+        inputActions.Player.Touch.performed -= ctx => TouchPerformed();
+        inputActions.Player.Touch.canceled -= ctx => TouchCanceled();
+        inputActions.Disable();
+    }
+
+    private void Update()
+    {
+        pointerPosition = inputActions.UI.Pointer.ReadValue<Vector2>();
+    }
+
+    private void TouchPerformed()
+    {
+        onTouchPerformed?.Invoke();
+        controllable?.Run();
+    }
+
+    private void TouchCanceled()
+    {
+        onTouchCanceled?.Invoke();
+        controllable?.Stop();
     }
 
     //Public Methods. Activation & Deactivation
-    public void DeactivateControls()
+    public void DeactivatePlayerControls()
     {
-        controllable.Stop();
+        controllable?.Stop();
         inputActions.Player.Disable();
     }
 
-    public void ActivateControls()
+    public void ActivatePlayerControls()
     {
         inputActions.Player.Enable();
     }
